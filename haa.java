@@ -1,3 +1,3 @@
 public class haa{
-    public static void dilan othmanwwwwww
+    public static void dilan othmanwwwwwwssss
 }public class ddddddssssss
