@@ -1,3 +1,3 @@
 public class haa{
-    public static 
+    public static void dilan
 }
