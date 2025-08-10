@@ -1,19 +1,19 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="de">
 
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Document</title>
+    <title>Shop</title>
     <link rel="stylesheet" href="3.css" />
 </head>
 
 <body>
     <header>
         <h1>Willkommen</h1>
-        <form id="loginForm" >
-            <input type="text" id="nameInput" placeholder="name" required />
-            <input type="password" id="passwordInput" placeholder="password" required />
+        <form id="loginForm">
+            <input type="text" id="nameInput" placeholder="Name" required />
+            <input type="password" id="passwordInput" placeholder="Passwort" required />
             <button type="submit">Login</button>
         </form>
     </header>
@@ -21,47 +21,54 @@
     <div id="bereich" class="deaktiviert">
         <main>
             <div id="box1">
-                <button onclick="datenholen()">Verfügbare Elemente anzeigen</button>
+                <button onclick="datenholen()">Verfügbare Produkte anzeigen</button>
                 <div id="produkteListe"></div>
             </div>
 
             <div id="box2">
-                <!-- weiterer Content -->
+                <h2>Warenkorb</h2>
+                <ul id="warenkorbListe"></ul>
             </div>
         </main>
     </div>
 
-    <script src="3.js"></script>
-    <script src="3b.js"></script>
     <script>
+        // Produkte anzeigen
         function datenholen() {
             const container = document.getElementById("produkteListe");
-            container.innerHTML = ""; // Inhalt löschen
+            container.innerHTML = "";
 
             fetch("http://localhost:8080/daten")
                 .then((res) => res.json())
                 .then((daten) => {
-                    daten.forEach((element) => {
-                        const e = document.createElement("ul");
+                    daten.forEach((produkt) => {
+                        const ul = document.createElement("ul");
 
-                        const e1 = document.createElement("li");
-                        e1.innerHTML = element.name;
+                        const liName = document.createElement("li");
+                        liName.textContent = produkt.name;
 
-                        const e2 = document.createElement("li");
-                        e2.innerHTML = `${element.preis} €`;
+                        const liPreis = document.createElement("li");
+                        liPreis.textContent = produkt.preis + " €";
 
-                        const e3 = document.createElement("li");
-                        e3.innerHTML = element.beschreibung;
+                        const liBeschreibung = document.createElement("li");
+                        liBeschreibung.textContent = produkt.beschreibung;
 
-                        e.appendChild(e1);
-                        e.appendChild(e2);
-                        e.appendChild(e3);
-                        document.getElementById("produkteListe").appendChild(e);
+                        const kaufenBtn = document.createElement("button");
+                        kaufenBtn.textContent = "Kaufen";
+                        kaufenBtn.addEventListener("click", () => kaufen(produkt.id));
+
+                        ul.appendChild(liName);
+                        ul.appendChild(liPreis);
+                        ul.appendChild(liBeschreibung);
+                        ul.appendChild(kaufenBtn);
+
+                        container.appendChild(ul);
                     });
                 })
-                .catch((err) => console.error("Fehler beim Laden der Daten:", err));
+                .catch((err) => console.error("Fehler beim Laden der Produkte:", err));
         }
 
+        // Login abfragen
         document.getElementById("loginForm").addEventListener("submit", function (e) {
             e.preventDefault();
             const name = document.getElementById("nameInput").value;
@@ -72,9 +79,7 @@
         function loginabfrage(name, password) {
             fetch("http://localhost:8080/login", {
                 method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
+                headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ name1: name, password1: password }),
             })
                 .then((res) => res.json())
@@ -87,6 +92,50 @@
                 })
                 .catch((err) => console.error(err));
         }
+
+        // Produkt kaufen
+        function kaufen(id) {
+            fetch("http://localhost:8080/kaufen", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ id: id }),  // Produkt-ID im Body senden
+            })
+                .then((res) => res.json()) // Antwort als JSON verarbeiten
+                .then((data) => {
+                    if (data.succes) {
+                        alert(`Produkt "${data.produkt.name}" wurde zum Warenkorb hinzugefügt.`);
+                        ladeWarenkorb(); // Warenkorb aktualisieren
+                    } else {
+                        alert(data.message || "Fehler beim Kauf");
+                    }
+                })
+                .catch((err) => console.error("Fehler beim Kauf:", err));
+        }
+
+
+        // Warenkorb laden (holt Warenkorb aus Backend)
+        function ladeWarenkorb() {
+            fetch("http://localhost:8080/warenkorb") // Diese Route müsstest du noch ergänzen (siehe unten)
+                .then((res) => res.json())
+                .then((warenkorb) => {
+                    const container = document.getElementById("warenkorbListe");
+                    container.innerHTML = "";
+                    warenkorb.forEach((produkt) => {
+                        const li = document.createElement("li");
+                        li.textContent = produkt.name + " - " + produkt.preis + " €";
+                        container.appendChild(li);
+                    });
+                })
+                .catch(() => {
+                    // Falls die Route nicht existiert, einfach ignorieren
+                    document.getElementById("warenkorbListe").innerHTML = "<li>Warenkorb leer</li>";
+                });
+        }
+
+        // Nach Login Warenkorb laden
+        document.getElementById("loginForm").addEventListener("submit", () => {
+            ladeWarenkorb();
+        });
     </script>
 </body>
 
