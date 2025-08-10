@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Document</title>
+    <link rel="stylesheet" href="3.css" />
+</head>
+
+<body>
+    <header>
+        <h1>Willkommen</h1>
+        <form id="loginForm" >
+            <input type="text" id="nameInput" placeholder="name" required />
+            <input type="password" id="passwordInput" placeholder="password" required />
+            <button type="submit">Login</button>
+        </form>
+    </header>
+
+    <div id="bereich" class="deaktiviert">
+        <main>
+            <div id="box1">
+                <button onclick="datenholen()">Verfügbare Elemente anzeigen</button>
+                <div id="produkteListe"></div>
+            </div>
+
+            <div id="box2">
+                <!-- weiterer Content -->
+            </div>
+        </main>
+    </div>
+
+    <script src="3.js"></script>
+    <script src="3b.js"></script>
+    <script>
+        function datenholen() {
+            const container = document.getElementById("produkteListe");
+            container.innerHTML = ""; // Inhalt löschen
+
+            fetch("http://localhost:8080/daten")
+                .then((res) => res.json())
+                .then((daten) => {
+                    daten.forEach((element) => {
+                        const e = document.createElement("ul");
+
+                        const e1 = document.createElement("li");
+                        e1.innerHTML = element.name;
+
+                        const e2 = document.createElement("li");
+                        e2.innerHTML = `${element.preis} €`;
+
+                        const e3 = document.createElement("li");
+                        e3.innerHTML = element.beschreibung;
+
+                        e.appendChild(e1);
+                        e.appendChild(e2);
+                        e.appendChild(e3);
+                        document.getElementById("produkteListe").appendChild(e);
+                    });
+                })
+                .catch((err) => console.error("Fehler beim Laden der Daten:", err));
+        }
+
+        document.getElementById("loginForm").addEventListener("submit", function (e) {
+            e.preventDefault();
+            const name = document.getElementById("nameInput").value;
+            const password = document.getElementById("passwordInput").value;
+            loginabfrage(name, password);
+        });
+
+        function loginabfrage(name, password) {
+            fetch("http://localhost:8080/login", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({ name1: name, password1: password }),
+            })
+                .then((res) => res.json())
+                .then((data) => {
+                    if (data.succes) {
+                        document.getElementById("bereich").classList.remove("deaktiviert");
+                    } else {
+                        alert("Login fehlgeschlagen!");
+                    }
+                })
+                .catch((err) => console.error(err));
+        }
+    </script>
+</body>
+
+</html>

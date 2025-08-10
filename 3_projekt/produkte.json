@@ -1,0 +1,138 @@
+[
+  {
+    "id": 1,
+    "name": "Bluetooth Kopfhörer",
+    "beschreibung": "Kabellose In-Ear Kopfhörer mit hoher Klangqualität.",
+    "preis": 49.99,
+    "kategorie": "Elektronik",
+    "lagerbestand": 150
+  },
+  {
+    "id": 2,
+    "name": "Gaming Maus",
+    "beschreibung": "Ergonomische Maus mit RGB-Beleuchtung und hoher Präzision.",
+    "preis": 39.99,
+    "kategorie": "Computer Zubehör",
+    "lagerbestand": 200
+  },
+  {
+    "id": 3,
+    "name": "Smartwatch",
+    "beschreibung": "Fitness-Tracker mit Herzfrequenzmesser und GPS.",
+    "preis": 89.99,
+    "kategorie": "Elektronik",
+    "lagerbestand": 120
+  },
+  {
+    "id": 4,
+    "name": "USB-C Kabel",
+    "beschreibung": "Schnelles Lade- und Datenkabel, 1m Länge.",
+    "preis": 9.99,
+    "kategorie": "Zubehör",
+    "lagerbestand": 500
+  },
+  {
+    "id": 5,
+    "name": "Laptop Rucksack",
+    "beschreibung": "Wasserabweisender Rucksack mit gepolstertem Laptopfach.",
+    "preis": 59.99,
+    "kategorie": "Taschen",
+    "lagerbestand": 80
+  },
+  {
+    "id": 6,
+    "name": "LED Schreibtischlampe",
+    "beschreibung": "Verstellbare Lampe mit Touch-Steuerung und Dimmer.",
+    "preis": 24.99,
+    "kategorie": "Beleuchtung",
+    "lagerbestand": 130
+  },
+  {
+    "id": 7,
+    "name": "Wireless Charger",
+    "beschreibung": "Schnellladegerät für alle Qi-kompatiblen Smartphones.",
+    "preis": 29.99,
+    "kategorie": "Elektronik",
+    "lagerbestand": 140
+  },
+  {
+    "id": 8,
+    "name": "Kaffeebecher Edelstahl",
+    "beschreibung": "Thermobecher, hält Getränke stundenlang warm.",
+    "preis": 19.99,
+    "kategorie": "Haushalt",
+    "lagerbestand": 210
+  },
+  {
+    "id": 9,
+    "name": "Bluetooth Lautsprecher",
+    "beschreibung": "Wasserfester Lautsprecher mit sattem Klang.",
+    "preis": 34.99,
+    "kategorie": "Elektronik",
+    "lagerbestand": 90
+  },
+  {
+    "id": 10,
+    "name": "Fitness Matte",
+    "beschreibung": "Rutschfeste Matte für Yoga und Fitnessübungen.",
+    "preis": 27.99,
+    "kategorie": "Sport",
+    "lagerbestand": 75
+  },
+  {
+    "id": 11,
+    "name": "Smartphone Hülle",
+    "beschreibung": "Robuste Hülle mit Stoßschutz.",
+    "preis": 14.99,
+    "kategorie": "Zubehör",
+    "lagerbestand": 300
+  },
+  {
+    "id": 12,
+    "name": "Küchenmesser Set",
+    "beschreibung": "3-teiliges Messer Set aus rostfreiem Stahl.",
+    "preis": 49.99,
+    "kategorie": "Haushalt",
+    "lagerbestand": 60
+  },
+  {
+    "id": 13,
+    "name": "Tablet Stand",
+    "beschreibung": "Verstellbarer Ständer für Tablets und Smartphones.",
+    "preis": 15.99,
+    "kategorie": "Zubehör",
+    "lagerbestand": 180
+  },
+  {
+    "id": 14,
+    "name": "Drahtlose Tastatur",
+    "beschreibung": "Kompakte Tastatur mit Bluetooth Verbindung.",
+    "preis": 32.99,
+    "kategorie": "Computer Zubehör",
+    "lagerbestand": 95
+  },
+  {
+    "id": 15,
+    "name": "Camping Lampe",
+    "beschreibung": "LED Lampe mit langer Akkulaufzeit, ideal fürs Camping.",
+    "preis": 22.99,
+    "kategorie": "Outdoor",
+    "lagerbestand": 110
+  },
+  {
+    "id": 16,
+    "name": "Reisetasche",
+    "beschreibung": "Leichte Tasche mit mehreren Fächern.",
+    "preis": 45.00,
+    "kategorie": "Taschen",
+    "lagerbestand": 70
+  },
+  {
+    "id": 17,
+    "name": "Wasserdichte Handyhülle",
+    "beschreibung": "Schutz für das Smartphone beim Schwimmen und Tauchen.",
+    "preis": 12.99,
+    "kategorie": "Zubehör",
+    "lagerbestand": 160
+  }
+]
