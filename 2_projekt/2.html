@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Professionelle To-Do Liste</title>
+  <link rel="stylesheet" href="2.css" />
+</head>
+<body>
+  <div id="app">
+    <h1>To-Do Liste</h1>
+
+    <form @submit.prevent="addTodo" class="todo-form">
+      <input
+        type="text"
+        v-model="newTodo"
+        placeholder="Neue Aufgabe hinzufügen..."
+        autocomplete="off"
+      />
+      <button type="submit">Hinzufügen</button>
+    </form>
+
+    <div class="filters">
+      <button
+        :class="{ active: filter === 'all' }"
+        @click="filter = 'all'"
+      >
+        Alle
+      </button>
+      <button
+        :class="{ active: filter === 'active' }"
+        @click="filter = 'active'"
+      >
+        Aktiv
+      </button>
+      <button
+        :class="{ active: filter === 'completed' }"
+        @click="filter = 'completed'"
+      >
+        Erledigt
+      </button>
+    </div>
+
+    <ul class="todo-list">
+      <li
+        v-for="todo in filteredTodos"
+        :key="todo.id"
+        :class="{ completed: todo.completed }"
+      >
+        <label>
+          <input type="checkbox" v-model="todo.completed" />
+          <span>{{ todo.text }}</span>
+        </label>
+        <button class="delete" @click="removeTodo(todo.id)">✕</button>
+      </li>
+    </ul>
+
+    <footer>
+      <span>{{ remaining }} Aufgaben übrig</span>
+      <button @click="clearCompleted" v-if="hasCompleted">Erledigte löschen</button>
+    </footer>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+  <script src="2.js"></script>
+</body>
+</html>
